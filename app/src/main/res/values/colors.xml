@@ -7,4 +7,14 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="colorAccent">#F1E1AE</color>
+
+    <!--메인텍스트(회색)-->
+    <color name="mainTextColor">#676d72</color>
+
+    <!--메인텍스트(진한 회색)-->
+    <color name="mainTextBoldColor">#4D4D4D</color>
+    <!--노란색2-->
+    <color name="mainAccentColor">#ebd58d</color>
 </resources>
