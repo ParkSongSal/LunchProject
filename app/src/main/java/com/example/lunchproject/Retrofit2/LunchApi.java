@@ -20,7 +20,7 @@ public interface LunchApi {
     // Login
     //@FormUrlEncoded
     @GET("user_login.php")
-    Call<ResultModel> UserLogin(@Query("userId") String userId,
+    Call<Result> UserLogin(@Query("userId") String userId,
                                 @Query("userPw") String userPw);
 
 
