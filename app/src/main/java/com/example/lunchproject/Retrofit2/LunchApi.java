@@ -34,6 +34,11 @@ public interface LunchApi {
                                     @Query("userPw") String user_phone,
                                     @Query("rgs_date") String rgs_date);
 
+
+    @Multipart
+    @POST("menu_recommend.php")
+    Call<List<Menu>> Menu_Recommend(@Part("menuCode") RequestBody menuCode);
+
     //@FormUrlEncoded
     // 게시판 리스트 조회
     @POST("getBoardList.php")
