@@ -8,10 +8,13 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="colorAccent">#F1E1AE</color>
+    <color name="colorMain">#F1E1AE</color>
+    <color name="colorMainDark">#A18F54</color>
+    <color name="colorAccent">#DFA45B</color>
 
     <!--메인텍스트(회색)-->
     <color name="mainTextColor">#676d72</color>
+    <color name="grayColor">#868687</color>
 
     <!--메인텍스트(진한 회색)-->
     <color name="mainTextBoldColor">#4D4D4D</color>
