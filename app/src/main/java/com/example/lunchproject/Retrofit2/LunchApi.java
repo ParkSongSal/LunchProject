@@ -30,7 +30,7 @@ public interface LunchApi {
 
     //닉네임 회원가입
     @GET("user_register.php")
-    Call<ResultModel> User_Register(@Query("userId") String user_name,
+    Call<Result> User_Register(@Query("userId") String user_name,
                                     @Query("userPw") String user_phone,
                                     @Query("rgs_date") String rgs_date);
 

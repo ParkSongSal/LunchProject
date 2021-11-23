@@ -92,7 +92,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
 
-        if (validate) {
+        if (!validate) {
             dialog = builder.setMessage("먼저 중복 체크를 해주세요.")
                     .setNegativeButton("확인", null)
                     .create();
@@ -108,30 +108,40 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
-        Call<ResultModel> call = mLunchApi.User_Register(userId, userPw, rgsDate);
-        call.enqueue(new Callback<ResultModel>() {
+        Call<Result> call = mLunchApi.User_Register(userId, userPw, rgsDate);
+        call.enqueue(new Callback<Result>() {
             @Override
-            public void onResponse(Call<ResultModel> call, retrofit2.Response<ResultModel> response) {
-                //정상 결과
-                if ("success".equals(response.body().getResult())) {
-                    dialog = builder.setMessage("회원등록에 성공했습니다.")
-                            .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    Common.intentCommon(RegisterActivity.this, LoginActivity.class);
-                                    finish();
-                                }
-                            }).create();
-                } else {
-                    dialog = builder.setMessage("회원 등록에 실패했습니다.")
-                            .setNegativeButton("확인", null)
-                            .create();
+            public void onResponse(Call<Result> call, Response<Result> response) {
+
+                if(response.isSuccessful()) {
+                    Result result = response.body();
+                    //정상 결과
+                    if ("success".equals(response.body().getResult())) {
+                        dialog = builder.setMessage("회원등록에 성공했습니다.")
+                                .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        Common.intentCommon(RegisterActivity.this, LoginActivity.class);
+                                        finish();
+                                    }
+                                }).create();
+                        dialog.show();
+                    } else {
+                        dialog = builder.setMessage("회원 등록에 실패했습니다.")
+                                .setNegativeButton("확인", null)
+                                .create();
+                        dialog.show();
+                    }
+
+                }else{
+                    Log.d("TAG","not successful");
+
                 }
-                dialog.show();
+
             }
 
             @Override
-            public void onFailure(Call<ResultModel> call, Throwable t) {
+            public void onFailure(Call<Result> call, Throwable t) {
                 // 네트워크 문제
                 Toast.makeText(RegisterActivity.this, "데이터 접속 상태를 확인 후 다시 시도해주세요.", Toast.LENGTH_LONG).show();
                 Log.d("TAG", "response : " + t.toString());
@@ -146,11 +156,8 @@ public class RegisterActivity extends AppCompatActivity {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
 
-        if (!validate) {
-            return;
-        }
         if (userId.equals("")) {
-            dialog = builder.setMessage("닉네임은 빈 칸일 수 없습니다.")
+            dialog = builder.setMessage("ID는 빈 칸일 수 없습니다.")
                     .setPositiveButton("확인", null)
                     .create();
             dialog.show();
@@ -160,24 +167,29 @@ public class RegisterActivity extends AppCompatActivity {
         call.enqueue(new Callback<Result>() {
             @Override
             public void onResponse(Call<Result> call, Response<Result> response) {
-                Log.d("TAG", "response : " + response.toString());
-                Log.d("TAG", "response b: " + response.body().toString());
-                Result result = response.body();
-                if(result.getResult().equals("success")){
-                    dialog = builder.setMessage("사용할 수 있는 닉네임입니다.")
-                            .setPositiveButton("확인", null)
-                            .create();
-                    dialog.show();
-                    mUserId.setEnabled(false);
-                    validate = true;
-                    mValidateBtn.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+
+                if(response.isSuccessful()){
+                    Result result = response.body();
+                    if(result.getResult().equals("success")){
+                        dialog = builder.setMessage("사용 가능한 ID 입니다.")
+                                .setPositiveButton("확인", null)
+                                .create();
+                        dialog.show();
+                        mUserId.setEnabled(false);
+                        validate = true;
+                        mValidateBtn.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                    }else{
+                        //중복인 닉네임 존재
+                        dialog = builder.setMessage("이미 존재하는 ID 입니다.")
+                                .setNegativeButton("확인", null)
+                                .create();
+                        dialog.show();
+                    }
                 }else{
-                    //중복인 닉네임 존재
-                    dialog = builder.setMessage("사용할 수 없는 닉네임입니다.")
-                            .setNegativeButton("확인", null)
-                            .create();
-                    dialog.show();
+                    Log.d("TAG","not successful");
                 }
+
+
 
             }
 
@@ -185,10 +197,6 @@ public class RegisterActivity extends AppCompatActivity {
             public void onFailure(Call<Result> call, Throwable t) {
                 // 네트워크 문제
                 Toast.makeText(RegisterActivity.this, "데이터 접속 상태를 확인 후 다시 시도해주세요.", Toast.LENGTH_LONG).show();
-                Log.d("TAG", "response : " + t.toString());
-                Log.d("TAG", "response : " + t.getMessage());
-
-
             }
         });
     }

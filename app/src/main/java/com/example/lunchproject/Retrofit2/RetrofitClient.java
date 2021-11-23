@@ -18,7 +18,7 @@ public class RetrofitClient {
 
         mRetrofit = new Retrofit.Builder()
                 .baseUrl(LunchApi.BaseUrl)
-                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addConverterFactory(GsonConverterFactory.create())
                 .build();
         mLunchApi = mRetrofit.create(LunchApi.class);
     }

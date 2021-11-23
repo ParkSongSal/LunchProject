@@ -1,7 +1,11 @@
 
 package com.example.lunchproject.Retrofit2;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Result {
+
+    @SerializedName("result")
     String result;
 
     public String getResult() {
