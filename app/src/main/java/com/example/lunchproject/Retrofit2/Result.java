@@ -1,6 +1,7 @@
+
 package com.example.lunchproject.Retrofit2;
 
-public class ResultModel {
+public class Result {
     String result;
 
     public String getResult() {
@@ -10,6 +11,5 @@ public class ResultModel {
     public void setResult(String result) {
         this.result = result;
     }
-
 
 }

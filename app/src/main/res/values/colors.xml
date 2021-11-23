@@ -17,4 +17,8 @@
     <color name="mainTextBoldColor">#4D4D4D</color>
     <!--노란색2-->
     <color name="mainAccentColor">#ebd58d</color>
+
+    <!--  Login Btn  -->
+    <color name="colorControlHighlight">#EDDA94</color>
+    <color name="colorControlHighlight2">#BFA752</color>
 </resources>

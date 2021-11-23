@@ -7,6 +7,7 @@ import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
@@ -25,7 +26,7 @@ public interface LunchApi {
 
     // userId 중복검사
     @GET("user_id_validate.php")
-    Call<ResultModel> UserId_Validate(@Query("userId") String userId);
+    Call<Result> UserId_Validate(@Query("userId") String userId);
 
     //닉네임 회원가입
     @GET("user_register.php")

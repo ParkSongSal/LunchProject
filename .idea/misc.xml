@@ -5,7 +5,9 @@
       <map>
         <entry key="..\:/Users/psm2.DESKTOP-GR4J9ST/AndroidStudioProjects/LunchProject/app/src/main/res/drawable/ic_person_black_24dp.xml" value="0.5815384615384616" />
         <entry key="..\:/Users/psm2.DESKTOP-GR4J9ST/AndroidStudioProjects/LunchProject/app/src/main/res/drawable/ripple_ok_btn.xml" value="0.5815384615384616" />
+        <entry key="..\:/Users/psm2.DESKTOP-GR4J9ST/AndroidStudioProjects/LunchProject/app/src/main/res/drawable/ripple_registerbtn.xml" value="0.5815384615384616" />
         <entry key="..\:/Users/psm2.DESKTOP-GR4J9ST/AndroidStudioProjects/LunchProject/app/src/main/res/layout/activity_login.xml" value="0.2778993435448578" />
+        <entry key="..\:/Users/psm2.DESKTOP-GR4J9ST/AndroidStudioProjects/LunchProject/app/src/main/res/layout/activity_register.xml" value="0.20161290322580644" />
       </map>
     </option>
   </component>
