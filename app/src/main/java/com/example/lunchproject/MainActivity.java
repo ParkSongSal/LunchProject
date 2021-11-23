@@ -98,4 +98,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void menuKind(View view) {
+    }
 }
