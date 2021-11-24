@@ -251,6 +251,7 @@
         android:layout_height="150dp"
         android:layout_marginTop="10dp"
         android:layout_gravity="center"
+        android:background="@drawable/menu_border"
         android:gravity="center"
         android:textSize="30sp"
         android:text="메뉴 추천"
