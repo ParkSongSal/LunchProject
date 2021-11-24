@@ -39,6 +39,12 @@ public interface LunchApi {
     @POST("menu_recommend.php")
     Call<List<Menu>> Menu_Recommend(@Part("menuCode") RequestBody menuCode);
 
+    @Multipart
+    @POST("menuKind_recommend.php")
+    Call<List<Menu>> MenuKind_Recommend(@Part("menuKind") RequestBody menuKind,
+                                        @Part("menuCode") RequestBody menuCode);
+
+
     //@FormUrlEncoded
     // 게시판 리스트 조회
     @POST("getBoardList.php")

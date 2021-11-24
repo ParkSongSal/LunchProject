@@ -26,6 +26,7 @@
                 android:orientation="vertical">
 
                 <ImageButton
+                    android:id="@+id/menuKind_I01"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:src="@drawable/ic_baseline_fastfood_50"
@@ -34,6 +35,7 @@
                     android:onClick="menuKind"/>
 
                 <TextView
+                    android:id="@+id/menuKind_T01"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="한식"
@@ -50,6 +52,7 @@
                 android:orientation="vertical">
 
                 <ImageButton
+                    android:id="@+id/menuKind_I03"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:src="@drawable/ic_baseline_fastfood_50"
@@ -58,6 +61,7 @@
                     android:onClick="menuKind"/>
 
                 <TextView
+                    android:id="@+id/menuKind_T03"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="중식"
@@ -74,6 +78,7 @@
                 android:orientation="vertical">
 
                 <ImageButton
+                    android:id="@+id/menuKind_I02"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:src="@drawable/ic_baseline_fastfood_50"
@@ -82,6 +87,7 @@
                     android:onClick="menuKind"/>
 
                 <TextView
+                    android:id="@+id/menuKind_T02"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="일식"
@@ -98,6 +104,7 @@
                 android:orientation="vertical">
 
                 <ImageButton
+                    android:id="@+id/menuKind_I04"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:src="@drawable/ic_baseline_fastfood_50"
@@ -106,6 +113,7 @@
                     android:onClick="menuKind"/>
 
                 <TextView
+                    android:id="@+id/menuKind_T04"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="양식"
@@ -129,6 +137,7 @@
                 android:orientation="vertical">
 
                 <ImageButton
+                    android:id="@+id/menuKind_I07"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:src="@drawable/ic_baseline_fastfood_50"
@@ -137,6 +146,7 @@
                     android:onClick="menuKind"/>
 
                 <TextView
+                    android:id="@+id/menuKind_T07"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="간편"
@@ -153,6 +163,7 @@
                 android:orientation="vertical">
 
                 <ImageButton
+                    android:id="@+id/menuKind_I06"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:src="@drawable/ic_baseline_fastfood_50"
@@ -161,6 +172,7 @@
                     android:onClick="menuKind"/>
 
                 <TextView
+                    android:id="@+id/menuKind_T06"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="해장"
@@ -177,6 +189,7 @@
                 android:orientation="vertical">
 
                 <ImageButton
+                    android:id="@+id/menuKind_I05"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:src="@drawable/ic_baseline_fastfood_50"
@@ -185,6 +198,7 @@
                     android:onClick="menuKind"/>
 
                 <TextView
+                    android:id="@+id/menuKind_T05"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="탕,찌개"
@@ -201,6 +215,7 @@
                 android:orientation="vertical">
 
                 <ImageButton
+                    android:id="@+id/menuKind_I08"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:src="@drawable/ic_baseline_fastfood_50"
@@ -209,6 +224,7 @@
                     android:onClick="menuKind"/>
 
                 <TextView
+                    android:id="@+id/menuKind_T08"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="기타"
@@ -221,7 +237,7 @@
     </LinearLayout>
     <TextView
         android:id="@+id/menuNameTxt"
-        android:layout_width="150dp"
+        android:layout_width="200dp"
         android:layout_height="150dp"
         android:layout_marginTop="10dp"
         android:layout_gravity="center"

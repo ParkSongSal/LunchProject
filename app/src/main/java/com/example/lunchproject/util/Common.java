@@ -2,9 +2,11 @@ package com.example.lunchproject.util;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 
 public class Common {
 
@@ -29,5 +31,20 @@ public class Common {
         activity.startActivity(intent);
     }
 
+
+    public String getRandomMenuCode(int min, int max ){
+        String result = "";
+
+        Random random = new Random();
+
+        int randomCode = (int) ((Math.random() * (max - min)) + min);
+
+        result = String.valueOf(randomCode);
+
+        Log.d("TAG", "randomCode : " + randomCode);
+
+        Log.d("TAG", "randomCode result : " + result);
+        return result;
+    }
 
 }
