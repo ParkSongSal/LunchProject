@@ -1,17 +1,15 @@
 package com.example.lunchproject;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.lunchproject.Retrofit2.LunchApi;
 import com.example.lunchproject.Retrofit2.Menu;
-import com.example.lunchproject.Retrofit2.Result;
 import com.example.lunchproject.Retrofit2.RetrofitClient;
 import com.example.lunchproject.util.Common;
 
@@ -25,7 +23,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
-    private AlertDialog dialog;
 
     private LunchApi mLunchApi;
 
@@ -129,8 +126,11 @@ public class MainActivity extends AppCompatActivity {
          중식 -> 중식 메뉴 중 추천
     */
     public void menuKindRecommend(String menuCode){
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        // 서버에 메뉴 추천 요청
+        call_Menu_Recommend(menuCode);
+    }
 
+    public void call_Menu_Recommend(String menuCode){
         RequestBody menuCodePart = RequestBody.create(MultipartBody.FORM, menuCode);
         Call<List<Menu>> call = mLunchApi.Menu_Recommend(menuCodePart);
         call.enqueue(new Callback<List<Menu>>() {
@@ -153,7 +153,6 @@ public class MainActivity extends AppCompatActivity {
                     Log.d("TAG", "not successful");
                 }
             }
-
             @Override
             public void onFailure(Call<List<Menu>> call, Throwable t) {
                 // 네트워크 문제
@@ -161,49 +160,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
     // 전체 메뉴중 메뉴 추천
     public void menuRecommend() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
         Random random = new Random();
         String menuCode = ""; // 01~79
         int limit = 80;
         int randomCode = 0;
-        randomCode = random.nextInt(limit);
-        Log.d("TAG", "randomCode : " + randomCode);
+        randomCode = random.nextInt(limit); // 1~ 79 사이 menu_code 랜덤 뽑기
         menuCode = String.valueOf(randomCode);
-        Log.d("TAG", "menuCode : " + menuCode);
 
-        RequestBody menuCodePart = RequestBody.create(MultipartBody.FORM, menuCode);
-        Call<List<Menu>> call = mLunchApi.Menu_Recommend(menuCodePart);
-        call.enqueue(new Callback<List<Menu>>() {
-            @Override
-            public void onResponse(Call<List<Menu>> call, Response<List<Menu>> response) {
-
-                List<Menu> result = response.body();
-
-                if (response.isSuccessful()) {
-                    for (int i = 0; i < result.size(); i++) {
-                        String seq = result.get(i).getSeq();
-                        String menuName = result.get(i).getMenu_name();
-                        String menuKind = result.get(i).getMenu_kind();
-                        String menuCode = result.get(i).getMenu_code();
-                        Menu menu = new Menu(seq, menuKind, menuName, menuCode);
-                        mMenuName.setText(menu.getMenu_name());
-                    }
-
-                } else {
-                    Log.d("TAG", "not successful");
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Menu>> call, Throwable t) {
-                // 네트워크 문제
-                Toast.makeText(MainActivity.this, "데이터 접속 상태를 확인 후 다시 시도해주세요.", Toast.LENGTH_LONG).show();
-            }
-        });
+        // 서버에 전체 메뉴 추천 요청
+        call_Menu_Recommend(menuCode);
     }
 
 }

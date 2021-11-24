@@ -38,9 +38,13 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onClick(View view) {
         switch (view.getId()){
+
+            // 로그인 버튼
             case R.id.loginBtn:
-                loginAct();
+                loginAct(); // 서버에 로그인 요청
                 break;
+
+            // 회원가입 버튼
             case R.id.registerBtn:
                 intent = new Intent(this, RegisterActivity.class);
                 startActivity(intent);
@@ -56,6 +60,7 @@ public class LoginActivity extends AppCompatActivity {
         String userPw = mPassword.getText().toString();
         AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
 
+        // id 빈칸 확인
         if (userId.equals("")) {
             dialog = builder.setMessage("아이디는 빈 칸일 수 없습니다.")
                     .setPositiveButton("확인", null)
@@ -63,6 +68,7 @@ public class LoginActivity extends AppCompatActivity {
             dialog.show();
             return;
         }
+        // pw 빈칸 확인
         if (userPw.equals("")) {
             dialog = builder.setMessage("패스워드는 빈 칸일 수 없습니다.")
                     .setPositiveButton("확인", null)
@@ -78,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 if(response.isSuccessful()){
                     Result result = response.body();
-                    if(result.getResult().equals("success")){
+                    if("success".equals(result.getResult())){
                         Common.intentCommon(LoginActivity.this, MainActivity.class);
                         finish();
                         Toast.makeText(getApplicationContext(), "로그인 성공!", Toast.LENGTH_SHORT).show();

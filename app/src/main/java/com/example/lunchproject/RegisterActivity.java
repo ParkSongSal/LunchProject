@@ -52,7 +52,6 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
                 if (!hasFocus) {
-                    //Toast.makeText(getApplicationContext(), "Focus Lose", Toast.LENGTH_SHORT).show();
                     String pass1 = mPassword.getText().toString();
                     String pass2 = mPassword2.getText().toString();
                     if (pass1.equals(pass2)) {
@@ -72,11 +71,14 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void onClick(View view) {
         switch (view.getId()){
+            // 회원가입 버튼
             case R.id.registerActBtn:
-                userRegister();
+                userRegister(); // 서버에 회원가입 요청
                 break;
+
+            // 중복검사 버튼
             case R.id.validateBtn:
-                userIdValidate();
+                userIdValidate();   // 서버에 id 중복검사 요청
                 break;
             default :
                 break;
@@ -125,17 +127,15 @@ public class RegisterActivity extends AppCompatActivity {
                                         finish();
                                     }
                                 }).create();
-                        dialog.show();
                     } else {
                         dialog = builder.setMessage("회원 등록에 실패했습니다.")
                                 .setNegativeButton("확인", null)
                                 .create();
-                        dialog.show();
                     }
+                    dialog.show();
 
                 }else{
                     Log.d("TAG","not successful");
-
                 }
 
             }
@@ -144,8 +144,6 @@ public class RegisterActivity extends AppCompatActivity {
             public void onFailure(Call<Result> call, Throwable t) {
                 // 네트워크 문제
                 Toast.makeText(RegisterActivity.this, "데이터 접속 상태를 확인 후 다시 시도해주세요.", Toast.LENGTH_LONG).show();
-                Log.d("TAG", "response : " + t.toString());
-                Log.d("TAG", "response : " + t.getMessage());
             }
         });
     }
@@ -188,9 +186,6 @@ public class RegisterActivity extends AppCompatActivity {
                 }else{
                     Log.d("TAG","not successful");
                 }
-
-
-
             }
 
             @Override
