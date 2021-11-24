@@ -1,5 +1,6 @@
 package com.example.lunchproject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -30,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     Common common;
+    Menu menu;
+    Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,13 +41,25 @@ public class MainActivity extends AppCompatActivity {
 
         mLunchApi = new RetrofitClient().getLunchApi();
         common = new Common();
+
+        menu = new Menu();
     }
 
 
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.menuNameTxt:
-                Toast.makeText(getApplicationContext(), "메뉴추천!", Toast.LENGTH_SHORT).show();
+                intent = new Intent(this, MenuInfoActivity.class);
+                if(menu.getMenu_code() != null ){
+                    intent.putExtra("menu", menu);
+                    startActivity(intent);
+                    finish();
+                    Toast.makeText(getApplicationContext(), "메뉴추천! " + menu.getMenu_code(), Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getApplicationContext(), "메뉴추천을 눌러주세요! ", Toast.LENGTH_SHORT).show();
+                }
+
+
                 break;
             case R.id.menuRecommendBtn:
                 // 밥먹으러 Go! -> 메뉴 추천
@@ -145,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
                         String menuName = result.get(i).getMenu_name();
                         String menuKind = result.get(i).getMenu_kind();
                         String menuCode = result.get(i).getMenu_code();
-                        Menu menu = new Menu(seq, menuKind, menuName, menuCode);
+                        menu = new Menu(seq, menuKind, menuName, menuCode);
                         mMenuName.setText(menu.getMenu_name());
                     }
 

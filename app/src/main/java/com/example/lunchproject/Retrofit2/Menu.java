@@ -3,7 +3,9 @@ package com.example.lunchproject.Retrofit2;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Menu {
+import java.io.Serializable;
+
+public class Menu implements Serializable {
 
     @SerializedName("result")
     String result;
@@ -17,6 +19,10 @@ public class Menu {
     @SerializedName("menu_code")
     String menu_code;
 
+
+    public Menu(){
+
+    }
     public Menu(String seq, String menu_kind, String menu_name, String menu_code) {
         this.seq = seq;
         this.menu_kind = menu_kind;
@@ -62,5 +68,16 @@ public class Menu {
 
     public void setMenu_code(String menu_code) {
         this.menu_code = menu_code;
+    }
+
+    @Override
+    public String toString() {
+        return "Menu{" +
+                "result='" + result + '\'' +
+                ", seq='" + seq + '\'' +
+                ", menu_kind='" + menu_kind + '\'' +
+                ", menu_name='" + menu_name + '\'' +
+                ", menu_code='" + menu_code + '\'' +
+                '}';
     }
 }

@@ -13,6 +13,8 @@
         <entry key="app/src/main/res/drawable/menu_border.xml" value="0.1814814814814815" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_menu_info.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item_menu_rating.xml" value="0.25" />
       </map>
     </option>
   </component>
