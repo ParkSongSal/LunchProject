@@ -61,6 +61,8 @@ public class MenuInfoActivity extends AppCompatActivity {
             mMenuCode = menu.getMenu_code();
             mMenuName = menu.getMenu_name();
             mMenuNameTxt.setText(mMenuName);
+
+            // 평균 평점
             float rating = 3.5F;
             mRatingBar.setRating(rating);
 

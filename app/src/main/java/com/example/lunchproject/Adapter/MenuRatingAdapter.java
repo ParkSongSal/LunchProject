@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -38,7 +39,12 @@ public class MenuRatingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
         myViewHolder.mWriter.setText(rating.getUpdateId());
 
-        myViewHolder.mGrade.setText("평점 : " + rating.getGrade());
+
+        //myViewHolder.mGrade.setText("평점 : " + rating.getGrade());
+
+        float grade = Float.parseFloat(rating.getGrade());
+
+        myViewHolder.mRatingBar.setRating(grade);
 
         myViewHolder.mDate.setText(rating.getUpdateDate());
 
@@ -54,11 +60,12 @@ public class MenuRatingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     class MyViewHolder extends RecyclerView.ViewHolder{
         TextView mWriter, mGrade, mDate, mReply;
-
+        RatingBar mRatingBar;
         public MyViewHolder(View itemView) {
             super(itemView);
             mWriter = itemView.findViewById(R.id.writerTxt);
-            mGrade = itemView.findViewById(R.id.gradeTxt);
+            //mGrade = itemView.findViewById(R.id.gradeTxt);
+            mRatingBar = itemView.findViewById(R.id.ratingBar);
             mDate = itemView.findViewById(R.id.dateTxt);
             mReply = itemView.findViewById(R.id.replyTxt);
 
