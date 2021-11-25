@@ -44,7 +44,7 @@ public interface LunchApi {
     Call<List<Menu>> MenuKind_Recommend(@Part("menuKind") RequestBody menuKind,
                                         @Part("menuCode") RequestBody menuCode);
 
-    //닉네임 회원가입
+    // 메뉴 평가 등록
     @GET("menuRating_write.php")
     Call<Result> MenuRatingWrite(@Query("menuCode") String menuCode,
                                @Query("grade") String grade,
@@ -54,48 +54,14 @@ public interface LunchApi {
                                  @Query("updateDate") String updateDate,
                                  @Query("updateId") String updateId);
 
-    //@FormUrlEncoded
-    // 게시판 리스트 조회
-    @POST("getBoardList.php")
-    Call<List<ResultModel>> getBoardList();
 
-    // 게시판 Insert (이미지 o)
+    // 메뉴 평가 조회
     @Multipart
-    @POST("Gwangju_Board_Insert.php")
-    Call<ResponseBody>InsertBoard(@Part("USER") RequestBody user,
-                                  @Part("TITLE") RequestBody title,
-                                  @Part("CONTENT") RequestBody content,
-                                  @Part("DATE") RequestBody date,
-                                  @Part MultipartBody.Part image);
+    @POST("menu_rating_select.php")
+    Call<List<MenuRating>> MenuRatingSelect(@Part("menuCode") RequestBody menuCode);
 
 
 
-    // 게시판 Insert (이미지 x)
-    @Multipart
-    @POST("Gwangju_Board_Insert_NoImage.php")
-    Call<ResponseBody>InsertBoard_NoImage(@Part("USER") RequestBody user,
-                                          @Part("TITLE") RequestBody title,
-                                          @Part("CONTENT") RequestBody content,
-                                          @Part("DATE") RequestBody date);
-
-    // 게시판 Update (이미지 o)
-    @Multipart
-    @POST("Gwangju_Board_Update.php")
-    Call<ResponseBody>UpdateBoard(@Part("Seq") RequestBody seq,
-                                  @Part("USER") RequestBody user,
-                                  @Part("TITLE") RequestBody title,
-                                  @Part("CONTENT") RequestBody content,
-                                  @Part("DATE") RequestBody date,
-                                  @Part MultipartBody.Part image);
-
-    // 게시판 Update (이미지 x)
-    @Multipart
-    @POST("Gwangju_Board_No_Image_Update.php")
-    Call<ResponseBody>UpdateBoard_NoImage(@Part("Seq") RequestBody seq,
-                                          @Part("USER") RequestBody user,
-                                          @Part("TITLE") RequestBody title,
-                                          @Part("CONTENT") RequestBody content,
-                                          @Part("DATE") RequestBody date);
 
 
 }

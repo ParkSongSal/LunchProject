@@ -2,44 +2,44 @@ package com.example.lunchproject.Retrofit2;
 
 public class MenuRating {
 
-    String seq;
-    String mCode;
+    String b_id;
+    String m_code;
     String grade;
     String content;
     String registDate;
     String registId;
-    String updateDate;
-    String updateId;
+    String update_date;
+    String update_id;
 
     public MenuRating(){
 
     }
 
-    public MenuRating(String seq, String mCode, String grade, String content, String registDate, String registId, String updateDate, String updateId) {
-        this.seq = seq;
-        this.mCode = mCode;
+    public MenuRating(String b_id, String m_code, String grade, String content, String registDate, String registId, String update_date, String update_id) {
+        this.b_id = b_id;
+        this.m_code = m_code;
         this.grade = grade;
         this.content = content;
         this.registDate = registDate;
         this.registId = registId;
-        this.updateDate = updateDate;
-        this.updateId = updateId;
+        this.update_date = update_date;
+        this.update_id = update_id;
     }
 
-    public String getSeq() {
-        return seq;
+    public String getB_id() {
+        return b_id;
     }
 
-    public void setSeq(String seq) {
-        this.seq = seq;
+    public void setB_id(String b_id) {
+        this.b_id = b_id;
     }
 
-    public String getmCode() {
-        return mCode;
+    public String getM_code() {
+        return m_code;
     }
 
-    public void setmCode(String mCode) {
-        this.mCode = mCode;
+    public void setM_code(String m_code) {
+        this.m_code = m_code;
     }
 
     public String getGrade() {
@@ -74,33 +74,33 @@ public class MenuRating {
         this.registId = registId;
     }
 
-    public String getUpdateDate() {
-        return updateDate;
+    public String getUpdate_date() {
+        return update_date;
     }
 
-    public void setUpdateDate(String updateDate) {
-        this.updateDate = updateDate;
+    public void setUpdate_date(String update_date) {
+        this.update_date = update_date;
     }
 
-    public String getUpdateId() {
-        return updateId;
+    public String getUpdate_id() {
+        return update_id;
     }
 
-    public void setUpdateId(String updateId) {
-        this.updateId = updateId;
+    public void setUpdate_id(String update_id) {
+        this.update_id = update_id;
     }
 
     @Override
     public String toString() {
         return "MenuRating{" +
-                "seq='" + seq + '\'' +
-                ", mCode='" + mCode + '\'' +
+                "b_id='" + b_id + '\'' +
+                ", m_code='" + m_code + '\'' +
                 ", grade='" + grade + '\'' +
                 ", content='" + content + '\'' +
                 ", registDate='" + registDate + '\'' +
                 ", registId='" + registId + '\'' +
-                ", updateDate='" + updateDate + '\'' +
-                ", updateId='" + updateId + '\'' +
+                ", update_date='" + update_date + '\'' +
+                ", update_id='" + update_id + '\'' +
                 '}';
     }
 }

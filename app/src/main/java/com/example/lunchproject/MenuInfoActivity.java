@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.media.Rating;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,15 +13,24 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.lunchproject.Adapter.MenuRatingAdapter;
+import com.example.lunchproject.Retrofit2.LunchApi;
 import com.example.lunchproject.Retrofit2.Menu;
 import com.example.lunchproject.Retrofit2.MenuRating;
+import com.example.lunchproject.Retrofit2.RetrofitClient;
 import com.example.lunchproject.util.Common;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class MenuInfoActivity extends AppCompatActivity {
+    private LunchApi mLunchApi;
 
     Intent intent;
     Menu menu;
@@ -43,6 +53,8 @@ public class MenuInfoActivity extends AppCompatActivity {
         mRatingBar = findViewById(R.id.ratingBar);
         FloatingActionButton fab = findViewById(R.id.fab);
 
+        mLunchApi = new RetrofitClient().getLunchApi();
+
         menu = new Menu();
         intent = getIntent();
 
@@ -51,11 +63,11 @@ public class MenuInfoActivity extends AppCompatActivity {
 
         ratingList = new ArrayList<MenuRating>();
 
-        rating = new MenuRating("1","15","4.6","덮밥 맛잇어요!!","2021-11-24","admin","2021-11-24","admin");
-        ratingList.add(rating);
-        mAdapter = new MenuRatingAdapter(getApplicationContext(), ratingList);
+        //rating = new MenuRating("1","15","4.6","덮밥 맛잇어요!!","2021-11-24","admin","2021-11-24","admin");
+        //ratingList.add(rating);
+        //mAdapter = new MenuRatingAdapter(getApplicationContext(), ratingList);
 
-        mRecycle_view.setAdapter(mAdapter);
+        //mRecycle_view.setAdapter(mAdapter);
 
         if(intent != null){
 
@@ -66,6 +78,7 @@ public class MenuInfoActivity extends AppCompatActivity {
             mMenuName = menu.getMenu_name();
             mMenuNameTxt.setText(mMenuName);
 
+            getMenuRating(mMenuCode);
             // 평균 평점
             float rating = 3.5F;
             mRatingBar.setRating(rating);
@@ -91,6 +104,47 @@ public class MenuInfoActivity extends AppCompatActivity {
                 intent.putExtra("menuCode", menu.getMenu_code());
                 startActivity(intent);
                 finish();
+            }
+        });
+    }
+
+    public void getMenuRating(String menuCode){
+        RequestBody menuCodePart = RequestBody.create(MultipartBody.FORM, menuCode);
+        Call<List<MenuRating>> call = mLunchApi.MenuRatingSelect(menuCodePart);
+        call.enqueue(new Callback<List<MenuRating>>() {
+            @Override
+            public void onResponse(Call<List<MenuRating>> call, Response<List<MenuRating>> response) {
+
+                List<MenuRating> result = response.body();
+                int resultSize = result.size();
+                float fGrade = 0;
+                if (response.isSuccessful()) {
+                    for (int i = 0; i < result.size(); i++) {
+
+                        String mBId = result.get(i).getB_id();
+                        String mMCode = result.get(i).getM_code();
+                        String mGrade = result.get(i).getGrade();
+                        String mContent = result.get(i).getContent();
+                        String mUpdateDate = result.get(i).getUpdate_date();
+                        String mUpdateId = result.get(i).getUpdate_id();
+                        rating = new MenuRating(mBId, mMCode, mGrade,mContent,null, null, mUpdateDate, mUpdateId);
+                        Log.d("TAG", "rating : " + rating.toString());
+                        float formatGrade = Float.parseFloat(mGrade);
+                        fGrade += formatGrade;
+                        ratingList.add(rating);
+                        mAdapter = new MenuRatingAdapter(getApplicationContext(), ratingList);
+                        mRecycle_view.setAdapter(mAdapter);
+                    }
+                    mRatingBar.setRating(fGrade / resultSize);
+
+                } else {
+                    Log.d("TAG", "not successful");
+                }
+            }
+            @Override
+            public void onFailure(Call<List<MenuRating>> call, Throwable t) {
+                // 네트워크 문제
+                Toast.makeText(getApplicationContext(), "데이터 접속 상태를 확인 후 다시 시도해주세요.", Toast.LENGTH_LONG).show();
             }
         });
     }
