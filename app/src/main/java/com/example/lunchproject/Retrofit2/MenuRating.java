@@ -3,23 +3,28 @@ package com.example.lunchproject.Retrofit2;
 public class MenuRating {
 
     String seq;
-
-    String writer;
+    String mCode;
     String grade;
-    String date;
-    String reply;
+    String content;
+    String registDate;
+    String registId;
+    String updateDate;
+    String updateId;
 
     public MenuRating(){
 
     }
-    public MenuRating(String seq, String writer, String grade, String date, String reply) {
-        this.seq = seq;
-        this.writer = writer;
-        this.grade = grade;
-        this.date = date;
-        this.reply = reply;
-    }
 
+    public MenuRating(String seq, String mCode, String grade, String content, String registDate, String registId, String updateDate, String updateId) {
+        this.seq = seq;
+        this.mCode = mCode;
+        this.grade = grade;
+        this.content = content;
+        this.registDate = registDate;
+        this.registId = registId;
+        this.updateDate = updateDate;
+        this.updateId = updateId;
+    }
 
     public String getSeq() {
         return seq;
@@ -29,12 +34,12 @@ public class MenuRating {
         this.seq = seq;
     }
 
-    public String getWriter() {
-        return writer;
+    public String getmCode() {
+        return mCode;
     }
 
-    public void setWriter(String writer) {
-        this.writer = writer;
+    public void setmCode(String mCode) {
+        this.mCode = mCode;
     }
 
     public String getGrade() {
@@ -45,30 +50,57 @@ public class MenuRating {
         this.grade = grade;
     }
 
-    public String getDate() {
-        return date;
+    public String getContent() {
+        return content;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public String getReply() {
-        return reply;
+    public String getRegistDate() {
+        return registDate;
     }
 
-    public void setReply(String reply) {
-        this.reply = reply;
+    public void setRegistDate(String registDate) {
+        this.registDate = registDate;
+    }
+
+    public String getRegistId() {
+        return registId;
+    }
+
+    public void setRegistId(String registId) {
+        this.registId = registId;
+    }
+
+    public String getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(String updateDate) {
+        this.updateDate = updateDate;
+    }
+
+    public String getUpdateId() {
+        return updateId;
+    }
+
+    public void setUpdateId(String updateId) {
+        this.updateId = updateId;
     }
 
     @Override
     public String toString() {
         return "MenuRating{" +
                 "seq='" + seq + '\'' +
-                ", writer='" + writer + '\'' +
+                ", mCode='" + mCode + '\'' +
                 ", grade='" + grade + '\'' +
-                ", date='" + date + '\'' +
-                ", reply='" + reply + '\'' +
+                ", content='" + content + '\'' +
+                ", registDate='" + registDate + '\'' +
+                ", registId='" + registId + '\'' +
+                ", updateDate='" + updateDate + '\'' +
+                ", updateId='" + updateId + '\'' +
                 '}';
     }
 }

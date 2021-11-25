@@ -36,13 +36,13 @@ public class MenuRatingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
         MyViewHolder myViewHolder = (MyViewHolder) holder;
 
-        myViewHolder.mWriter.setText(rating.getWriter());
+        myViewHolder.mWriter.setText(rating.getUpdateId());
 
-        myViewHolder.mGrade.setText(rating.getGrade());
+        myViewHolder.mGrade.setText("평점 : " + rating.getGrade());
 
-        myViewHolder.mDate.setText(rating.getDate());
+        myViewHolder.mDate.setText(rating.getUpdateDate());
 
-        myViewHolder.mReply.setText(rating.getReply());
+        myViewHolder.mReply.setText(rating.getContent());
 
 
     }
