@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,6 +15,7 @@ import com.example.lunchproject.Adapter.MenuRatingAdapter;
 import com.example.lunchproject.Retrofit2.Menu;
 import com.example.lunchproject.Retrofit2.MenuRating;
 import com.example.lunchproject.util.Common;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +41,8 @@ public class MenuInfoActivity extends AppCompatActivity {
         mMenuNameTxt = findViewById(R.id.menuNameTxt);
         mRecycle_view = findViewById(R.id.recyclerView);
         mRatingBar = findViewById(R.id.ratingBar);
+        FloatingActionButton fab = findViewById(R.id.fab);
+
         menu = new Menu();
         intent = getIntent();
 
@@ -66,20 +70,26 @@ public class MenuInfoActivity extends AppCompatActivity {
             float rating = 3.5F;
             mRatingBar.setRating(rating);
 
-            mRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            /*mRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
                 @Override
                 public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
                     //mRateText.setText("Now Rating : " + rating);
 
                 }
-            });
-
-
+            });*/
         }else{
             Common.intentCommon(MenuInfoActivity.this, MainActivity.class);
             finish();
             Toast.makeText(getApplicationContext(), "잘못된 데이터입니다.", Toast.LENGTH_SHORT).show();
         }
 
+        // 리뷰 등록 버튼 클릭
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Common.intentCommon(MenuInfoActivity.this, MenuRatingWriteActivity.class);
+                finish();
+            }
+        });
     }
 }

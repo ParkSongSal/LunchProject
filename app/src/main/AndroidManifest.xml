@@ -13,6 +13,9 @@
         android:theme="@style/Theme.LunchProject"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".MenuRatingWriteActivity"
+            android:exported="false" />
+        <activity
             android:name=".MenuInfoActivity"
             android:exported="false" />
         <activity
