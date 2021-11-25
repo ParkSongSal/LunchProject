@@ -87,7 +87,9 @@ public class MenuInfoActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Common.intentCommon(MenuInfoActivity.this, MenuRatingWriteActivity.class);
+                intent = new Intent(getApplicationContext(), MenuRatingWriteActivity.class);
+                intent.putExtra("menuCode", menu.getMenu_code());
+                startActivity(intent);
                 finish();
             }
         });

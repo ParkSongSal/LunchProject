@@ -44,6 +44,15 @@ public interface LunchApi {
     Call<List<Menu>> MenuKind_Recommend(@Part("menuKind") RequestBody menuKind,
                                         @Part("menuCode") RequestBody menuCode);
 
+    //닉네임 회원가입
+    @GET("menuRating_write.php")
+    Call<Result> MenuRatingWrite(@Query("menuCode") String menuCode,
+                               @Query("grade") String grade,
+                               @Query("content") String content,
+                                 @Query("registDate") String rgsDate,
+                                 @Query("registId") String registId,
+                                 @Query("updateDate") String updateDate,
+                                 @Query("updateId") String updateId);
 
     //@FormUrlEncoded
     // 게시판 리스트 조회
