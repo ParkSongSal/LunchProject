@@ -3,7 +3,9 @@ package com.example.lunchproject;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.Rating;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +21,9 @@ import com.example.lunchproject.Retrofit2.MenuRating;
 import com.example.lunchproject.Retrofit2.RetrofitClient;
 import com.example.lunchproject.util.Common;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +46,9 @@ public class MenuInfoActivity extends AppCompatActivity {
     RecyclerView mRecycle_view;
     MenuRatingAdapter mAdapter;
     List<MenuRating> ratingList;
+    private SharedPreferences preferences;
 
+    String loginId = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +61,8 @@ public class MenuInfoActivity extends AppCompatActivity {
         FloatingActionButton fab = findViewById(R.id.fab);
 
         mLunchApi = new RetrofitClient().getLunchApi();
+        preferences = getSharedPreferences("setting", MODE_PRIVATE);
+        loginId = preferences.getString("loginId", "");
 
         menu = new Menu();
         intent = getIntent();
@@ -132,7 +141,7 @@ public class MenuInfoActivity extends AppCompatActivity {
                         float formatGrade = Float.parseFloat(mGrade);
                         fGrade += formatGrade;
                         ratingList.add(rating);
-                        mAdapter = new MenuRatingAdapter(getApplicationContext(), ratingList);
+                        mAdapter = new MenuRatingAdapter(getApplicationContext(), ratingList, loginId);
                         mRecycle_view.setAdapter(mAdapter);
                     }
                     mRatingBar.setRating(fGrade / resultSize);
@@ -147,6 +156,40 @@ public class MenuInfoActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "데이터 접속 상태를 확인 후 다시 시도해주세요.", Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    // 보낸이 : MemoRecyclerAdapter
+    @SuppressLint("RestrictedApi")
+    @Subscribe
+    public void onItemClick(MenuRatingAdapter.ItemClickEvent event) {
+        //Memo memo2 = newMemoList.get(event.position);
+        //Intent intent = new Intent(getApplicationContext(), BoardInsertActivity.class);
+        //startActivity(intent);
+        Toast.makeText(getApplicationContext(), "수정!!!!", Toast.LENGTH_SHORT).show();
+
+    }
+
+    // 보낸이 : MemoRecyclerAdapter
+    @SuppressLint("RestrictedApi")
+    @Subscribe
+    public void onItemDeleteClick(MenuRatingAdapter.ItemDeleteClickEvent event) {
+        //Memo memo2 = newMemoList.get(event.position);
+        //Intent intent = new Intent(getApplicationContext(), BoardInsertActivity.class);
+        //startActivity(intent);
+        Toast.makeText(getApplicationContext(), "삭제!!!!", Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
