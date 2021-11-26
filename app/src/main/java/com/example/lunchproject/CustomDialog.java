@@ -1,20 +1,18 @@
 package com.example.lunchproject;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-public class NativeAdDialog extends Dialog {
+public class CustomDialog extends Dialog {
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_native_ad_dialog);
+        setContentView(R.layout.activity_custom_dialog);
 
         //NativeExpressAdView adView = (NativeExpressAdView) findViewById(R.id.adView);
         TextView quit = (TextView) findViewById(R.id.dialog_btn_quit);
@@ -39,7 +37,7 @@ public class NativeAdDialog extends Dialog {
     }
 
 
-    public NativeAdDialog(Context context){
+    public CustomDialog(Context context){
         super(context);
     }
 }

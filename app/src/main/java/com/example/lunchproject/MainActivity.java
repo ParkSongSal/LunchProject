@@ -199,8 +199,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        //Admob 네이티브 광고
-        NativeAdDialog dialog = new NativeAdDialog(this);
+        CustomDialog dialog = new CustomDialog(this);
         dialog.show();
         // Alert을 이용해 종료시키기
 
