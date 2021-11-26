@@ -148,4 +148,12 @@ public class MenuInfoActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+
+        Common.intentCommon(MenuInfoActivity.this, MainActivity.class);
+        finish();
+
+    } //뒤로가기 종료버튼
 }

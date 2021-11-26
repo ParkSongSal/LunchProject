@@ -136,4 +136,11 @@ public class MenuRatingWriteActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+
+        Common.intentCommon(MenuRatingWriteActivity.this, MainActivity.class);
+        finish();
+
+    } //뒤로가기 종료버튼
 }
