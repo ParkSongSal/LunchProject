@@ -221,6 +221,8 @@ public class MenuInfoActivity extends AppCompatActivity {
                     //정상 결과
                     if ("success".equals(response.body().getResult())) {
                         Toast.makeText(MenuInfoActivity.this, "평가를 삭제했습니다.", Toast.LENGTH_LONG).show();
+                        Common.intentCommon(MenuInfoActivity.this, MainActivity.class);
+                        finish();
                     } else {
                         Toast.makeText(MenuInfoActivity.this, "평가 삭제를 실패했습니다.", Toast.LENGTH_LONG).show();
                     }
