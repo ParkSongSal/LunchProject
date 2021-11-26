@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -26,6 +27,9 @@ public class LoginActivity extends AppCompatActivity {
     private LunchApi mLunchApi;
     private EditText mUserId, mPassword;
 
+    private SharedPreferences preferences;
+    SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +38,9 @@ public class LoginActivity extends AppCompatActivity {
         mLunchApi = new RetrofitClient().getLunchApi();
         mUserId = findViewById(R.id.idEditText);
         mPassword = findViewById(R.id.pwEditText);
+
+        // SharedPreferences Init
+        preferences = getSharedPreferences("setting", MODE_PRIVATE);
     }
 
     public void onClick(View view) {
@@ -85,6 +92,13 @@ public class LoginActivity extends AppCompatActivity {
                 if(response.isSuccessful()){
                     Result result = response.body();
                     if("success".equals(result.getResult())){
+
+                        editor  = preferences.edit();
+
+                        editor.putString("loginId",userId);
+                        //항상 commit & apply 를 해주어야 저장이 된다.
+                        editor.apply();
+
                         Common.intentCommon(LoginActivity.this, MainActivity.class);
                         finish();
                         Toast.makeText(getApplicationContext(), "로그인 성공!", Toast.LENGTH_SHORT).show();

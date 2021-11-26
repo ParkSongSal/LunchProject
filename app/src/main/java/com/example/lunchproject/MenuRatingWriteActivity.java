@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -33,6 +34,7 @@ public class MenuRatingWriteActivity extends AppCompatActivity {
 
     Intent intent;
     private LunchApi mLunchApi;
+    private SharedPreferences preferences;
 
     // 등록할 평점
     float mGrade = 0;
@@ -47,6 +49,8 @@ public class MenuRatingWriteActivity extends AppCompatActivity {
         mContent = findViewById(R.id.contentEdit);
 
         mLunchApi = new RetrofitClient().getLunchApi();
+
+        preferences = getSharedPreferences("setting", MODE_PRIVATE);
 
         mRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
@@ -87,6 +91,7 @@ public class MenuRatingWriteActivity extends AppCompatActivity {
         final String gradeTxt = String.valueOf(grade);
         final String content = mContent.getText().toString();
         final String rgsDate = Common.nowDate("yyyy-MM-dd HH:mm:ss");
+        final String loginId = preferences.getString("loginId", "");
 
         //
         if ("".equals(content)) {
@@ -96,8 +101,14 @@ public class MenuRatingWriteActivity extends AppCompatActivity {
             dialog.show();
             return;
         }
+        if("".equals(loginId)){
+            Common.intentCommon(this, LoginActivity.class);
+            finish();
+            Toast.makeText(getApplicationContext(), "로그인 정보가 없습니다.", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-        Call<Result> call = mLunchApi.MenuRatingWrite(menuCode, gradeTxt, content, rgsDate, "admin", rgsDate, "admin");
+        Call<Result> call = mLunchApi.MenuRatingWrite(menuCode, gradeTxt, content, rgsDate, loginId, rgsDate, loginId);
         call.enqueue(new Callback<Result>() {
             @Override
             public void onResponse(Call<Result> call, Response<Result> response) {

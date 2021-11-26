@@ -49,8 +49,6 @@ public class MenuRatingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         myViewHolder.mDate.setText(rating.getUpdate_date());
 
         myViewHolder.mReply.setText(rating.getContent());
-
-
     }
 
     @Override
