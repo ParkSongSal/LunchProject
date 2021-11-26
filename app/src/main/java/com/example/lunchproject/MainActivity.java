@@ -1,5 +1,6 @@
 package com.example.lunchproject;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.lunchproject.Retrofit2.LunchApi;
@@ -26,6 +28,7 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
 
     private LunchApi mLunchApi;
+    private AlertDialog dialog;
 
     TextView mMenuName;
 
@@ -33,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     Common common;
     Menu menu;
     Intent intent;
+    AlertDialog.Builder builder;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
         common = new Common();
 
         menu = new Menu();
+
+        builder = new AlertDialog.Builder(MainActivity.this);
     }
 
 
@@ -188,5 +195,16 @@ public class MainActivity extends AppCompatActivity {
         // 서버에 전체 메뉴 추천 요청
         call_Menu_Recommend(menuCode);
     }
+
+    @Override
+    public void onBackPressed() {
+
+        //Admob 네이티브 광고
+        NativeAdDialog dialog = new NativeAdDialog(this);
+        dialog.show();
+        // Alert을 이용해 종료시키기
+
+
+    } //뒤로가기 종료버튼
 
 }
