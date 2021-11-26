@@ -179,13 +179,16 @@ public class MenuInfoActivity extends AppCompatActivity {
     @SuppressLint("RestrictedApi")
     @Subscribe
     public void onItemClick(MenuRatingAdapter.ItemClickEvent event) {
+
+
+        intent = new Intent(getApplicationContext(), MenuRatingUpdateActivity.class);
+
         String bId = ratingList.get(event.position).getB_id();
-
-        //Memo memo2 = newMemoList.get(event.position);
-        //Intent intent = new Intent(getApplicationContext(), BoardInsertActivity.class);
-        //startActivity(intent);
-        Toast.makeText(getApplicationContext(), "수정!!!!" + bId, Toast.LENGTH_SHORT).show();
-
+        intent.putExtra("bId", bId);
+        intent.putExtra("content", ratingList.get(event.position).getContent());
+        intent.putExtra("grade", ratingList.get(event.position).getGrade());
+        startActivity(intent);
+        finish();
     }
 
     // 보낸이 : MemoRecyclerAdapter

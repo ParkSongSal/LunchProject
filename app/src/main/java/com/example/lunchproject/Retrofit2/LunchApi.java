@@ -55,6 +55,14 @@ public interface LunchApi {
                                  @Query("updateId") String updateId);
 
 
+    // 메뉴 평가 수정
+    @GET("menu_rating_update.php")
+    Call<Result> MenuRatingUpdate(@Query("b_id") String b_id,
+                                 @Query("grade") String grade,
+                                 @Query("content") String content,
+                                 @Query("updateDate") String updateDate,
+                                 @Query("updateId") String updateId);
+
     // 메뉴 평가 조회
     @Multipart
     @POST("menu_rating_select.php")
