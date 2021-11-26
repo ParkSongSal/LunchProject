@@ -1,9 +1,11 @@
 package com.example.lunchproject;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.Rating;
@@ -18,6 +20,7 @@ import com.example.lunchproject.Adapter.MenuRatingAdapter;
 import com.example.lunchproject.Retrofit2.LunchApi;
 import com.example.lunchproject.Retrofit2.Menu;
 import com.example.lunchproject.Retrofit2.MenuRating;
+import com.example.lunchproject.Retrofit2.Result;
 import com.example.lunchproject.Retrofit2.RetrofitClient;
 import com.example.lunchproject.util.Common;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -36,7 +39,8 @@ import retrofit2.Response;
 
 public class MenuInfoActivity extends AppCompatActivity {
     private LunchApi mLunchApi;
-
+    private AlertDialog dialog;
+    AlertDialog.Builder builder;
     Intent intent;
     Menu menu;
     MenuRating rating;
@@ -71,6 +75,7 @@ public class MenuInfoActivity extends AppCompatActivity {
         rating = new MenuRating();
 
         ratingList = new ArrayList<MenuRating>();
+        builder = new AlertDialog.Builder(MenuInfoActivity.this);
 
         //rating = new MenuRating("1","15","4.6","덮밥 맛잇어요!!","2021-11-24","admin","2021-11-24","admin");
         //ratingList.add(rating);
@@ -174,10 +179,12 @@ public class MenuInfoActivity extends AppCompatActivity {
     @SuppressLint("RestrictedApi")
     @Subscribe
     public void onItemClick(MenuRatingAdapter.ItemClickEvent event) {
+        String bId = ratingList.get(event.position).getB_id();
+
         //Memo memo2 = newMemoList.get(event.position);
         //Intent intent = new Intent(getApplicationContext(), BoardInsertActivity.class);
         //startActivity(intent);
-        Toast.makeText(getApplicationContext(), "수정!!!!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "수정!!!!" + bId, Toast.LENGTH_SHORT).show();
 
     }
 
@@ -185,12 +192,59 @@ public class MenuInfoActivity extends AppCompatActivity {
     @SuppressLint("RestrictedApi")
     @Subscribe
     public void onItemDeleteClick(MenuRatingAdapter.ItemDeleteClickEvent event) {
-        //Memo memo2 = newMemoList.get(event.position);
-        //Intent intent = new Intent(getApplicationContext(), BoardInsertActivity.class);
-        //startActivity(intent);
-        Toast.makeText(getApplicationContext(), "삭제!!!!", Toast.LENGTH_SHORT).show();
+        String bId = ratingList.get(event.position).getB_id();
 
+        dialog = builder.setTitle("해당 재료를 삭제하시겠습니까?")
+                .setPositiveButton("예", new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        menuRatingDelete(bId);
+                    }
+                })
+                .setNegativeButton("아니오", null)
+                .create();
+
+        dialog.show();
     }
+
+    public void menuRatingDelete(String bId){
+        Call<Result> call = mLunchApi.MenuRatingDelete(bId);
+        call.enqueue(new Callback<Result>() {
+            @Override
+            public void onResponse(Call<Result> call, Response<Result> response) {
+
+                if(response.isSuccessful()) {
+                    //정상 결과
+                    if ("success".equals(response.body().getResult())) {
+                        dialog = builder.setMessage("평가 삭제했습니다.")
+                                .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        Common.intentCommon(MenuInfoActivity.this, MainActivity.class);
+                                        finish();
+                                    }
+                                }).create();
+                    } else {
+                        dialog = builder.setMessage("평가 삭제를 실패했습니다.")
+                                .setNegativeButton("확인", null)
+                                .create();
+                    }
+                    dialog.show();
+
+                }else{
+                    Log.d("TAG","not successful");
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<Result> call, Throwable t) {
+                // 네트워크 문제
+                Toast.makeText(MenuInfoActivity.this, "데이터 접속 상태를 확인 후 다시 시도해주세요.", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
 
     @Override
     public void onBackPressed() {

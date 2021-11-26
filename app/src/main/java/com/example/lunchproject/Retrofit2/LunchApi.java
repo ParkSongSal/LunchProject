@@ -60,6 +60,9 @@ public interface LunchApi {
     @POST("menu_rating_select.php")
     Call<List<MenuRating>> MenuRatingSelect(@Part("menuCode") RequestBody menuCode);
 
+    // 메뉴 평가 삭제
+    @GET("menu_rating_delete.php")
+    Call<Result> MenuRatingDelete(@Query("b_id") String b_id);
 
 
 
