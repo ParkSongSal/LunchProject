@@ -197,7 +197,8 @@ public class MenuInfoActivity extends AppCompatActivity {
     public void onItemDeleteClick(MenuRatingAdapter.ItemDeleteClickEvent event) {
         String bId = ratingList.get(event.position).getB_id();
 
-        dialog = builder.setTitle("해당 재료를 삭제하시겠습니까?")
+        dialog = builder.setTitle("삭제알림")
+                .setMessage("해당 평가를 삭제하시겠습니까?")
                 .setPositiveButton("예", new DialogInterface.OnClickListener(){
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -219,21 +220,10 @@ public class MenuInfoActivity extends AppCompatActivity {
                 if(response.isSuccessful()) {
                     //정상 결과
                     if ("success".equals(response.body().getResult())) {
-                        dialog = builder.setMessage("평가 삭제했습니다.")
-                                .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        Common.intentCommon(MenuInfoActivity.this, MainActivity.class);
-                                        finish();
-                                    }
-                                }).create();
+                        Toast.makeText(MenuInfoActivity.this, "평가를 삭제했습니다.", Toast.LENGTH_LONG).show();
                     } else {
-                        dialog = builder.setMessage("평가 삭제를 실패했습니다.")
-                                .setNegativeButton("확인", null)
-                                .create();
+                        Toast.makeText(MenuInfoActivity.this, "평가 삭제를 실패했습니다.", Toast.LENGTH_LONG).show();
                     }
-                    dialog.show();
-
                 }else{
                     Log.d("TAG","not successful");
                 }
