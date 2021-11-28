@@ -55,9 +55,7 @@ public class MenuRatingWriteActivity extends AppCompatActivity {
         mRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
-                //mRateText.setText("Now Rating : " + rating);
                 mGrade = v;
-                Toast.makeText(getApplicationContext(), "평점 : " + mGrade, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -93,7 +91,7 @@ public class MenuRatingWriteActivity extends AppCompatActivity {
         final String rgsDate = Common.nowDate("yyyy-MM-dd HH:mm:ss");
         final String loginId = preferences.getString("loginId", "");
 
-        //
+
         if ("".equals(content)) {
             dialog = builder.setMessage("빈 칸 없이 입력해주세요.")
                     .setNegativeButton("확인", null)

@@ -77,12 +77,6 @@ public class MenuInfoActivity extends AppCompatActivity {
         ratingList = new ArrayList<MenuRating>();
         builder = new AlertDialog.Builder(MenuInfoActivity.this);
 
-        //rating = new MenuRating("1","15","4.6","덮밥 맛잇어요!!","2021-11-24","admin","2021-11-24","admin");
-        //ratingList.add(rating);
-        //mAdapter = new MenuRatingAdapter(getApplicationContext(), ratingList);
-
-        //mRecycle_view.setAdapter(mAdapter);
-
         if(intent != null){
 
             menu  = (Menu) intent.getSerializableExtra("menu");
@@ -93,17 +87,7 @@ public class MenuInfoActivity extends AppCompatActivity {
             mMenuNameTxt.setText(mMenuName);
 
             getMenuRating(mMenuCode);
-            // 평균 평점
-            float rating = 3.5F;
-            mRatingBar.setRating(rating);
 
-            /*mRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-                @Override
-                public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
-                    //mRateText.setText("Now Rating : " + rating);
-
-                }
-            });*/
         }else{
             Common.intentCommon(MenuInfoActivity.this, MainActivity.class);
             finish();
@@ -142,7 +126,6 @@ public class MenuInfoActivity extends AppCompatActivity {
                         String mUpdateDate = result.get(i).getUpdate_date();
                         String mUpdateId = result.get(i).getUpdate_id();
                         rating = new MenuRating(mBId, mMCode, mGrade,mContent,null, null, mUpdateDate, mUpdateId);
-                        Log.d("TAG", "rating : " + rating.toString());
                         float formatGrade = Float.parseFloat(mGrade);
                         fGrade += formatGrade;
                         ratingList.add(rating);
@@ -175,6 +158,7 @@ public class MenuInfoActivity extends AppCompatActivity {
         EventBus.getDefault().unregister(this);
     }
 
+    // 메뉴 평가 수정 버튼 클릭
     // 보낸이 : MemoRecyclerAdapter
     @SuppressLint("RestrictedApi")
     @Subscribe
@@ -191,6 +175,7 @@ public class MenuInfoActivity extends AppCompatActivity {
         finish();
     }
 
+    // 메뉴 평가 삭제 버튼 클릭
     // 보낸이 : MemoRecyclerAdapter
     @SuppressLint("RestrictedApi")
     @Subscribe
@@ -211,6 +196,7 @@ public class MenuInfoActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    // 메뉴 평가 삭제 처리
     public void menuRatingDelete(String bId){
         Call<Result> call = mLunchApi.MenuRatingDelete(bId);
         call.enqueue(new Callback<Result>() {

@@ -71,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
             case R.id.menuRecommendBtn:
                 // 밥먹으러 Go! -> 메뉴 추천
                 menuRecommend();
-                //Toast.makeText(getApplicationContext(), "밥먹으러 Go!", Toast.LENGTH_SHORT).show();
                 break;
             default:
                 break;

@@ -64,13 +64,6 @@ public class MenuRatingUpdateActivity extends AppCompatActivity {
             mRatingBar.setRating(mGrade);
             mContent.setText(intent.getStringExtra("content"));
 
-            /*mRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-                @Override
-                public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
-                    //mRateText.setText("Now Rating : " + rating);
-
-                }
-            });*/
         }else{
             Common.intentCommon(MenuRatingUpdateActivity.this, MainActivity.class);
             finish();

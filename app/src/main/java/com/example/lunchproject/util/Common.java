@@ -24,27 +24,21 @@ public class Common {
         return formatDate;
     }
 
-
-
-    public static void intentCommon(Activity activity, Class cls2) {
-        Intent intent = new Intent(activity, cls2);
-        activity.startActivity(intent);
-    }
-
-
+    // 메뉴 번호 랜덤 뽑기
     public String getRandomMenuCode(int min, int max ){
         String result = "";
-
-        Random random = new Random();
 
         int randomCode = (int) ((Math.random() * (max - min)) + min);
 
         result = String.valueOf(randomCode);
 
-        Log.d("TAG", "randomCode : " + randomCode);
-
-        Log.d("TAG", "randomCode result : " + result);
         return result;
+    }
+
+
+    public static void intentCommon(Activity activity, Class cls2) {
+        Intent intent = new Intent(activity, cls2);
+        activity.startActivity(intent);
     }
 
 }
